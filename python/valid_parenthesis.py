@@ -27,8 +27,8 @@ if __name__ == "__main__":
     case_3 = "(]"
     case_4 = "([])"
     case_5 = "([)]"
-    case_6 = "()()"
+    case_6 = "fgs(grgs)sgfsa(sagsa)"
     case_7 = ")("
 
 
-    print(isValid(case_5))
+    print(isValid(case_6))
