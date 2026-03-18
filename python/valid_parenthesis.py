@@ -14,7 +14,7 @@ def isValid(s: str) -> bool:
                 elif s[i] == ")" and stack.pop() == "(":
                     i += 1
                 elif s[i] == "}" and stack.pop() == "{":
-                    i += 1 
+                    i += 1
                 elif s[i] == "]" and stack.pop() == "[":
                     i += 1
                 else:
