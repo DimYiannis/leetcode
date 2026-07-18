@@ -43,7 +43,7 @@
 def sliding_window_maximum(nums: list[int], k: int) -> list[int]:
     if not nums or k <= 0 or k > len(nums):
         return []
-    return (max(nums[i:i+k]) for i in range(len(nums) - k + 1))
+    return list((max(nums[i:i+k]) for i in range(len(nums) - k + 1)))
 
 
 # print("excepted: [3, 3, 5, 5, 6, 7]")
