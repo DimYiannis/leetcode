@@ -88,19 +88,19 @@ def package_dependency_resolver(packages: dict[str, list[str]]) -> list[str]:
     if not packages:
         return []
 
-    # Filtrer les dependances qui ne sont pas dans le dict
+    # Filter out dependencies that are not in the dictionary
     deps = {}
     for name, dependencies in packages.items():
         deps[name] = [d for d in dependencies if d in packages]
 
-    # In-degree de chaque noeud
+    # In-degree of each node
     in_degree = {name: len(d) for name, d in deps.items()}
 
-    # File initiale : noeuds sans dependance, alphabetique
+    # Initial queue: nodes without dependencies, sorted alphabetically
     queue = sorted(name for name, deg in in_degree.items() if deg == 0)
     result = []
 
-    # BFS niveau par niveau (chaque "vague" alphabetique avant la suivante)
+    # BFS level by level (each alphabetical "wave" before the next one)
     while queue:
         next_queue = []
         for current in queue:
@@ -112,7 +112,7 @@ def package_dependency_resolver(packages: dict[str, list[str]]) -> list[str]:
                         next_queue.append(name)
         queue = sorted(next_queue)
 
-    # Cycle ? len(result) != len(packages)
+    # Cycle detected? len(result) != len(packages)
     if len(result) != len(packages):
         return []
     return result
