@@ -54,7 +54,7 @@ def array_rotation_detector(arr1: list[int], arr2: list[int]) -> bool:
     return any(doubled[i:i+n] == arr2 for i in range(n))
 
 
-# print(array_rotation_detector([1, 2, 3, 4, 5], [3, 4, 5, 1, 2])) #True
+print(array_rotation_detector([1, 2, 3, 4, 5], [3, 4, 5, 1, 2])) #True
 # print(array_rotation_detector([1, 2, 3, 4, 5], [4, 5, 1, 2, 3])) #True
 # print(array_rotation_detector([1, 2, 3, 4, 5], [1, 2, 3, 4, 5])) #True
 # print(array_rotation_detector([1, 2, 3, 4, 5], [2, 3, 4, 5, 1])) #True

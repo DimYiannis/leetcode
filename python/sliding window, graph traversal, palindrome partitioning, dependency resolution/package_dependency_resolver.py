@@ -83,20 +83,28 @@
 # result = package_dependency_resolver(packages)
 # print(' '.join(result))  # Output: driver database app
 
+'''
+1.Find packages that require nothing and put them in a queue.
+2.Take a ready package, add it to the result.
+3.Check every package to see which ones depended on it.
+4.Reduce their remaining dependency count.
+5.If a package reaches zero remaining dependencies, add it to the queue.
+6.Repeat until everything is processed or no packages remain.
+'''
 
 def package_dependency_resolver(packages: dict[str, list[str]]) -> list[str]:
     if not packages:
         return []
 
-    # Filter out dependencies that are not in the dictionary
+    # removes dependencies that don't exist
     deps = {}
     for name, dependencies in packages.items():
         deps[name] = [d for d in dependencies if d in packages]
 
-    # In-degree of each node
+    # how many dependencies are still blocking this package
     in_degree = {name: len(d) for name, d in deps.items()}
 
-    # Initial queue: nodes without dependencies, sorted alphabetically
+    # only packages with no remaining dependencies can be installed.
     queue = sorted(name for name, deg in in_degree.items() if deg == 0)
     result = []
 
@@ -119,11 +127,11 @@ def package_dependency_resolver(packages: dict[str, list[str]]) -> list[str]:
 
 
 # res = package_dependency_resolver({"app": ["database"], "database": ["driver"], "driver": []})
-# print(f"excepted: [\"driver\", \"database\", \"app\"]")
+# print(f"excepted: ["driver", "database", "app"]")
 # print(f"got: {res}\n")
 
 # res = package_dependency_resolver({"A": [], "B": ["A"], "C": ["A", "B"]})
-# print(f"excepted: [\"A\", \"B\", \"C\"]")
+# print(f"excepted: ["A", "B", "C"]")
 # print(f"got: {res}\n")
 
 # res = package_dependency_resolver({"X": ["Y"], "Y": ["X"]})
@@ -131,7 +139,7 @@ def package_dependency_resolver(packages: dict[str, list[str]]) -> list[str]:
 # print(f"got: {res}\n")
 
 # res = package_dependency_resolver({"web": [], "api": [], "frontend": ["web"], "backend": ["api"]})
-# print(f"excepted: [\"api\", \"web\", \"backend\", \"frontend\"]")
+# print(f"excepted: ["api", "web", "backend", "frontend"]")
 # print(f"got: {res}\n")
 
 
